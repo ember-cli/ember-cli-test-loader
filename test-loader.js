@@ -10,7 +10,7 @@ for (var moduleName in requirejs.entries) {
   if (!QUnit.urlParams.nojshint && moduleName.match(/\.jshint$/)) { shouldLoad = true; }
 
   if (shouldLoad) { require(moduleName); }
-};
+}
 
 if (QUnit.notifications) {
   QUnit.notifications({
