@@ -6,7 +6,7 @@ QUnit.config.urlConfig.push({ id: 'nojshint', label: 'Disable JSHint'});
 for (var moduleName in requirejs.entries) {
   var shouldLoad;
 
-  if (moduleName.match(/-test$/)) { shouldLoad = true; }
+  if (moduleName.match(/[-_]test$/)) { shouldLoad = true; }
   if (!QUnit.urlParams.nojshint && moduleName.match(/\.jshint$/)) { shouldLoad = true; }
 
   if (shouldLoad) { require(moduleName); }
