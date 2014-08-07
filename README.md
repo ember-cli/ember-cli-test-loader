@@ -6,3 +6,4 @@
 * Any modules in `requirejs.entries` that end with `-test`.
 * Any modules in `requirejs.entries` that end with `.jshint` (unless JSHint tests are disabled).
 * Sets up `QUnit.notifications` if it is present.
+* Adds 'Hide Testing Container' checkbox
