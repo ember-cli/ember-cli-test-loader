@@ -1,8 +1,19 @@
-### Ember CLI Test Loader
+## Ember CLI Test Loader
 
-#### What does it do?
+Defines a `TestLoader` object that reviews all of the modules in
+`requirejs.entries` and loads those identified as tests.
 
-* Adds a QUnit URL config entry for disabling JSHint.
-* Any modules in `requirejs.entries` that end with `-test`.
-* Any modules in `requirejs.entries` that end with `.jshint` (unless JSHint tests are disabled).
-* Sets up `QUnit.notifications` if it is present.
+`TestLoader.prototype.shouldLoadModule` can be overridden in order to customize
+the criteria for identifying test modules.
+
+### Usage
+
+Within your test suite:
+
+```javascript
+  var TestLoader = require('ember-cli/test-loader')['default'];
+
+  // optionally override TestLoader.prototype.shouldLoadModule
+
+  TestLoader.load();
+```

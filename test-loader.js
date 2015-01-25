@@ -1,24 +1,36 @@
 /* globals requirejs, require */
+(function() {
+define("ember-cli/test-loader",
+  [],
+  function() {
+    "use strict";
 
-var moduleName, shouldLoad;
+    var TestLoader = function() {
+    };
 
-QUnit.config.urlConfig.push({ id: 'nojshint', label: 'Disable JSHint'});
+    TestLoader.prototype = {
+      shouldLoadModule: function(moduleName) {
+        return (moduleName.match(/[-_]test$/));
+      },
 
-// TODO: load based on params
-for (moduleName in requirejs.entries) {
-  shouldLoad = false;
+      loadModules: function() {
+        var moduleName;
 
-  if (moduleName.match(/[-_]test$/)) { shouldLoad = true; }
-  if (!QUnit.urlParams.nojshint && moduleName.match(/\.jshint$/)) { shouldLoad = true; }
+        for (moduleName in requirejs.entries) {
+          if (this.shouldLoadModule(moduleName)) {
+            require(moduleName);
+          }
+        }
+      }
+    };
 
-  if (shouldLoad) { require(moduleName); }
-}
+    TestLoader.load = function() {
+      new TestLoader().loadModules();
+    };
 
-if (QUnit.notifications) {
-  QUnit.notifications({
-    icons: {
-      passed: '/assets/passed.png',
-      failed: '/assets/failed.png'
+    return {
+      'default': TestLoader
     }
-  });
-}
+  }
+);
+})();
