@@ -10,7 +10,7 @@ define("ember-cli/test-loader",
 
     TestLoader.prototype = {
       shouldLoadModule: function(moduleName) {
-        return (moduleName.match(/[-_]test$/));
+        return moduleName.match(/\/.*[-_]test$/);
       },
 
       loadModules: function() {
