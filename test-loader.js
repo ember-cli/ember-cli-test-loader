@@ -39,10 +39,17 @@ define("ember-cli/test-loader",
         return (moduleName.match(/[-_]test$/));
       },
 
-      loadModules: function() {
-        var moduleName;
+      listModules: function() {
+        return Object.keys(requirejs.entries);
+      },
 
-        for (moduleName in requirejs.entries) {
+      loadModules: function() {
+        var moduleName, index, length;
+        var moduleNames = this.listModules();
+
+        for (index = 0, length = moduleNames.length; index < length; index++) {
+          moduleName = moduleNames[index];
+
           if (checkMatchers(moduleExcludeMatchers, moduleName)) {
             continue;
           }
