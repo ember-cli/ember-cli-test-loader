@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-test-loader",
   "main": "test-loader.js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/rjackson/ember-cli-test-loader",
   "description": "Test loader for Ember CLI projects.",
   "license": "MIT",
