@@ -39,21 +39,34 @@ TestLoader.prototype = {
     return Object.keys(requirejs.entries);
   },
 
-  loadModules: function() {
-    var moduleName, index, length;
+  listTestModules: function(){
     var moduleNames = this.listModules();
+    var testModules = [];
+    var moduleName;
 
-    for (index = 0, length = moduleNames.length; index < length; index++) {
-      moduleName = moduleNames[index];
+    for (var i = 0; i < moduleNames.length; i++) {
+      moduleName = moduleNames[i];
 
       if (checkMatchers(moduleExcludeMatchers, moduleName)) {
         continue;
       }
 
       if (checkMatchers(moduleIncludeMatchers, moduleName) || this.shouldLoadModule(moduleName)) {
-        this.require(moduleName);
-        this.unsee(moduleName);
+        testModules.push(moduleName);
       }
+    }
+
+    return testModules;
+  },
+
+  loadModules: function() {
+    var testModules = this.listTestModules();
+    var testModule;
+
+    for (var i = 0; i < testModules.length; i++) {
+      testModule = testModules[i];
+      this.require(testModule);
+      this.unsee(testModule);
     }
   }
 };
