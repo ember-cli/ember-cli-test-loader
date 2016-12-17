@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/ember-cli/ember-cli-test-loader/issues"
   },
-  "homepage": "https://github.com/ember-cli/ember-cli-test-loader#readme"
+  "homepage": "https://github.com/ember-cli/ember-cli-test-loader#readme",
+  "dependencies": {
+    "ember-cli-babel": "^5.2.1"
+  }
 }
