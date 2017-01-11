@@ -11,7 +11,8 @@ the criteria for identifying test modules.
 Within your test suite:
 
 ```javascript
-  var TestLoader = require('ember-cli/test-loader')['default'];
+  
+  var TestLoader = require('ember-cli-test-loader/test-support/index')['default'];
 
   // optionally override TestLoader.prototype.shouldLoadModule
 
