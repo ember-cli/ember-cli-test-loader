@@ -8,10 +8,10 @@ the criteria for identifying test modules.
 
 ### Usage
 
-Within your test suite:
+Within tests/test-helper.js:
 
 ```javascript
-  var TestLoader = require('ember-cli/test-loader')['default'];
+  import TestLoader from 'ember-cli-test-loader/test-support';
 
   // optionally override TestLoader.prototype.shouldLoadModule
 
