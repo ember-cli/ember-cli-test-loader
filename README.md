@@ -17,3 +17,10 @@ Within tests/test-helper.js:
 
   TestLoader.load();
 ```
+
+#
+#
+#
+#
+---
+_**Note:** 1.0.0 will move to package.json from bower.json, but that is not enabled yet. The default ember-cli blueprint specifies 0.2.2 which should definitely not allow 1.0.0. - [[Link](https://github.com/ember-cli/ember-cli-test-loader/issues/19)]_
