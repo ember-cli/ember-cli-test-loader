@@ -1,8 +1,8 @@
 /* globals requirejs, require */
 "use strict";
 
-var moduleIncludeMatchers = [];
-var moduleExcludeMatchers = [];
+let moduleIncludeMatchers = [];
+let moduleExcludeMatchers = [];
 
 export function addModuleIncludeMatcher(fn) {
   moduleIncludeMatchers.push(fn);
@@ -30,11 +30,11 @@ export default class TestLoader {
   }
 
   listTestModules() {
-    var moduleNames = this.listModules();
-    var testModules = [];
-    var moduleName;
+    let moduleNames = this.listModules();
+    let testModules = [];
+    let moduleName;
 
-    for (var i = 0; i < moduleNames.length; i++) {
+    for (let i = 0; i < moduleNames.length; i++) {
       moduleName = moduleNames[i];
 
       if (checkMatchers(moduleExcludeMatchers, moduleName)) {
@@ -50,10 +50,10 @@ export default class TestLoader {
   }
 
   loadModules() {
-    var testModules = this.listTestModules();
-    var testModule;
+    let testModules = this.listTestModules();
+    let testModule;
 
-    for (var i = 0; i < testModules.length; i++) {
+    for (let i = 0; i < testModules.length; i++) {
       testModule = testModules[i];
       this.require(testModule);
       this.unsee(testModule);
