@@ -13,17 +13,7 @@ export function addModuleExcludeMatcher(fn) {
 };
 
 function checkMatchers(matchers, moduleName) {
-  var matcher;
-
-  for (var i = 0, l = matchers.length; i < l; i++) {
-    matcher = matchers[i];
-
-    if (matcher(moduleName)) {
-      return true;
-    }
-  }
-
-  return false;
+  return matchers.some(matcher => matcher(moduleName));
 }
 
 export default function TestLoader() {
