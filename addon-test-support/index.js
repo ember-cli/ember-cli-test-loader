@@ -16,20 +16,20 @@ function checkMatchers(matchers, moduleName) {
   return matchers.some(matcher => matcher(moduleName));
 }
 
-export default function TestLoader() {
-  this._didLogMissingUnsee = false;
-};
+export default class TestLoader {
+  constructor() {
+    this._didLogMissingUnsee = false;
+  }
 
-TestLoader.prototype = {
-  shouldLoadModule: function(moduleName) {
+  shouldLoadModule(moduleName) {
     return (moduleName.match(/[-_]test$/));
-  },
+  }
 
-  listModules: function() {
+  listModules() {
     return Object.keys(requirejs.entries);
-  },
+  }
 
-  listTestModules: function(){
+  listTestModules() {
     var moduleNames = this.listModules();
     var testModules = [];
     var moduleName;
@@ -47,9 +47,9 @@ TestLoader.prototype = {
     }
 
     return testModules;
-  },
+  }
 
-  loadModules: function() {
+  loadModules() {
     var testModules = this.listTestModules();
     var testModule;
 
@@ -59,31 +59,31 @@ TestLoader.prototype = {
       this.unsee(testModule);
     }
   }
-};
 
-TestLoader.prototype.require = function(moduleName) {
-  try {
-    require(moduleName);
-  } catch(e) {
-    this.moduleLoadFailure(moduleName, e);
-  }
-};
-
-TestLoader.prototype.unsee = function(moduleName) {
-  if (typeof require.unsee === 'function') {
-    require.unsee(moduleName);
-  } else if (!this._didLogMissingUnsee) {
-    this._didLogMissingUnsee = true;
-    if (typeof console !== 'undefined') {
-      console.warn('unable to require.unsee, please upgrade loader.js to >= v3.3.0');
+  require(moduleName) {
+    try {
+      require(moduleName);
+    } catch(e) {
+      this.moduleLoadFailure(moduleName, e);
     }
   }
-};
 
-TestLoader.prototype.moduleLoadFailure = function(moduleName, error) {
-  console.error('Error loading: ' + moduleName, error.stack);
-};
+  unsee(moduleName) {
+    if (typeof require.unsee === 'function') {
+      require.unsee(moduleName);
+    } else if (!this._didLogMissingUnsee) {
+      this._didLogMissingUnsee = true;
+      if (typeof console !== 'undefined') {
+        console.warn('unable to require.unsee, please upgrade loader.js to >= v3.3.0');
+      }
+    }
+  }
 
-TestLoader.load = function() {
-  new TestLoader().loadModules();
+  moduleLoadFailure(moduleName, error) {
+    console.error('Error loading: ' + moduleName, error.stack);
+  }
+
+  static load() {
+    new TestLoader().loadModules();
+  }
 };
