@@ -1,50 +1,44 @@
 /* globals requirejs, require */
 "use strict";
 
-var moduleIncludeMatchers = [];
-var moduleExcludeMatchers = [];
+let moduleIncludeMatchers = [];
+let moduleExcludeMatchers = [];
 
 export function addModuleIncludeMatcher(fn) {
   moduleIncludeMatchers.push(fn);
-};
+}
 
 export function addModuleExcludeMatcher(fn) {
   moduleExcludeMatchers.push(fn);
-};
-
-function checkMatchers(matchers, moduleName) {
-  var matcher;
-
-  for (var i = 0, l = matchers.length; i < l; i++) {
-    matcher = matchers[i];
-
-    if (matcher(moduleName)) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
-export default function TestLoader() {
-  this._didLogMissingUnsee = false;
-};
+function checkMatchers(matchers, moduleName) {
+  return matchers.some(matcher => matcher(moduleName));
+}
 
-TestLoader.prototype = {
-  shouldLoadModule: function(moduleName) {
+export default class TestLoader {
+  static load() {
+    new TestLoader().loadModules();
+  }
+
+  constructor() {
+    this._didLogMissingUnsee = false;
+  }
+
+  shouldLoadModule(moduleName) {
     return (moduleName.match(/[-_]test$/));
-  },
+  }
 
-  listModules: function() {
+  listModules() {
     return Object.keys(requirejs.entries);
-  },
+  }
 
-  listTestModules: function(){
-    var moduleNames = this.listModules();
-    var testModules = [];
-    var moduleName;
+  listTestModules() {
+    let moduleNames = this.listModules();
+    let testModules = [];
+    let moduleName;
 
-    for (var i = 0; i < moduleNames.length; i++) {
+    for (let i = 0; i < moduleNames.length; i++) {
       moduleName = moduleNames[i];
 
       if (checkMatchers(moduleExcludeMatchers, moduleName)) {
@@ -57,43 +51,39 @@ TestLoader.prototype = {
     }
 
     return testModules;
-  },
+  }
 
-  loadModules: function() {
-    var testModules = this.listTestModules();
-    var testModule;
+  loadModules() {
+    let testModules = this.listTestModules();
+    let testModule;
 
-    for (var i = 0; i < testModules.length; i++) {
+    for (let i = 0; i < testModules.length; i++) {
       testModule = testModules[i];
       this.require(testModule);
       this.unsee(testModule);
     }
   }
-};
 
-TestLoader.prototype.require = function(moduleName) {
-  try {
-    require(moduleName);
-  } catch(e) {
-    this.moduleLoadFailure(moduleName, e);
-  }
-};
-
-TestLoader.prototype.unsee = function(moduleName) {
-  if (typeof require.unsee === 'function') {
-    require.unsee(moduleName);
-  } else if (!this._didLogMissingUnsee) {
-    this._didLogMissingUnsee = true;
-    if (typeof console !== 'undefined') {
-      console.warn('unable to require.unsee, please upgrade loader.js to >= v3.3.0');
+  require(moduleName) {
+    try {
+      require(moduleName);
+    } catch(e) {
+      this.moduleLoadFailure(moduleName, e);
     }
   }
-};
 
-TestLoader.prototype.moduleLoadFailure = function(moduleName, error) {
-  console.error('Error loading: ' + moduleName, error.stack);
-};
+  unsee(moduleName) {
+    if (typeof require.unsee === 'function') {
+      require.unsee(moduleName);
+    } else if (!this._didLogMissingUnsee) {
+      this._didLogMissingUnsee = true;
+      if (typeof console !== 'undefined') {
+        console.warn('unable to require.unsee, please upgrade loader.js to >= v3.3.0');
+      }
+    }
+  }
 
-TestLoader.load = function() {
-  new TestLoader().loadModules();
+  moduleLoadFailure(moduleName, error) {
+    console.error('Error loading: ' + moduleName, error.stack);
+  }
 };
