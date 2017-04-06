@@ -6,11 +6,11 @@ let moduleExcludeMatchers = [];
 
 export function addModuleIncludeMatcher(fn) {
   moduleIncludeMatchers.push(fn);
-};
+}
 
 export function addModuleExcludeMatcher(fn) {
   moduleExcludeMatchers.push(fn);
-};
+}
 
 function checkMatchers(matchers, moduleName) {
   return matchers.some(matcher => matcher(moduleName));
