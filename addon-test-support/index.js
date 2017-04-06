@@ -17,6 +17,10 @@ function checkMatchers(matchers, moduleName) {
 }
 
 export default class TestLoader {
+  static load() {
+    new TestLoader().loadModules();
+  }
+
   constructor() {
     this._didLogMissingUnsee = false;
   }
@@ -81,9 +85,5 @@ export default class TestLoader {
 
   moduleLoadFailure(moduleName, error) {
     console.error('Error loading: ' + moduleName, error.stack);
-  }
-
-  static load() {
-    new TestLoader().loadModules();
   }
 };
