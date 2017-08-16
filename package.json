@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/ember-cli/ember-cli-test-loader#readme",
   "dependencies": {
-    "ember-cli-babel": "^6.0.0-beta.7"
+    "ember-cli-babel": "^6.8.1"
   }
 }
