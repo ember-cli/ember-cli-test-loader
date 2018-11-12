@@ -27,7 +27,7 @@
     "ember-cli-babel": "^6.8.1"
   },
   "devDependencies": {
-    "lerna-changelog": "^0.7.0"
+    "lerna-changelog": "^0.8.2"
   },
   "changelog": {
     "repo": "ember-cli/ember-cli-test-loader",
