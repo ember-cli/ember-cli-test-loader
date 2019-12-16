@@ -4,7 +4,7 @@
   "description": "Test loader for Ember CLI projects.",
   "main": "index.js",
   "engines": {
-    "node": ">= 4.0"
+    "node": "10.* || >= 12"
   },
   "scripts": {
     "changelog": "lerna-changelog",
