@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.0.0 (2019-12-16)
+
+#### :boom: Breaking Change
+* [#59](https://github.com/ember-cli/ember-cli-test-loader/pull/59) Drop support for Node 6 and 8 ([@Turbo87](https://github.com/Turbo87))
+* [#38](https://github.com/ember-cli/ember-cli-test-loader/pull/38) Update ember-cli-babel requirement from ^6.8.1 to ^7.1.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### :memo: Documentation
+* [#36](https://github.com/ember-cli/ember-cli-test-loader/pull/36) Add CHANGELOG ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 1
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
 ## v2.1.0 (2017-04-06)
 
 #### :house: Internal
