@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/ember-cli/ember-cli-test-loader#readme",
   "dependencies": {
-    "ember-cli-babel": "^7.23.0"
+    "ember-cli-babel": "^7.26.6"
   },
   "devDependencies": {
     "lerna-changelog": "^1.0.1"
